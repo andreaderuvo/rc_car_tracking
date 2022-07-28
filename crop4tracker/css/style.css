@@ -1,0 +1,72 @@
+body {
+    background: #f2f6f8;
+}
+
+button {
+    width: 30%;
+    height: 2em;
+    font-size: 2em;
+    color: white;
+}
+
+pre {
+    background: white;
+}
+
+#canvas {
+    position: relative;
+    z-index: 20;
+}
+
+#main {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto;
+}
+
+#img {
+    position: absolute;
+    z-index: 1;
+}
+
+#textarea {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#clearSelection {
+    background: red;
+}
+
+#nextImage {
+    background: green;
+}
+
+#previousImage {
+    background: blue;
+}
+
+#clearSession {
+    background: grey;
+}
+
+#downloadLog {
+    background: gold;
+}
+
+#status {
+    color: red;
+    font-size: 1.5em;
+}
+
+#title {
+    font-weight: bold;
+}
+
+#debug {
+    border: 2px solid gray;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

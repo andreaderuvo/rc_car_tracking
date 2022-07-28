@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crop 4 Tracker</title>
+    <meta name="description" content="A simple client side cropper to build a dataset to train a tracker.">
+    <meta name="author" content="Andrea de Ruvo">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <script>
+        SESSION_KEY = 'crop4tracker';
+        RECT_COLOR = 'red';
+        RECT_WIDTH = 2;
+        DOWNLOAD_FILE_JSON = 'crop4tracker.json';
+    </script>
+    <script src="js/download.js"></script>
+    <script src="js/mouse.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/load_image.js"></script>
+    <script src="js/main.js"></script>
+    <header id="header">
+        <h1 id="title">Crop 4 Tracker</h1>
+        <input type="file" id="fileSelector" multiple accept=".jpg, .jpeg, .png">
+        <!-- Zoom: <input type="number" id="zoom" value="1">-->
+    </header>
+    <main id="main">
+        <img id='img' />
+        <canvas id="canvas"></canvas>
+    </main>
+    <p id="status"></p>
+    <section id="footer">
+        <button id="previousImage">Previous Image</button>
+        <button id="clearSelection">Clear Selection</button>
+        <button id="nextImage">Next Image</button>
+    </section>
+    <section id="debug">
+        <p>Log:</p>
+        <pre id="textarea">
+        </pre>
+    </section>
+    <section id="toolbar">
+        <button id="clearSession">Clear Session Storage</button>
+        <button id="downloadLog">Download Log</button>
+    </section>
+</body>
+
+</html>
