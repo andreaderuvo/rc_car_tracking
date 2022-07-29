@@ -1,14 +1,15 @@
+# vim: expandtab:ts=4:sw=4
 import functools
 import numpy as np
-import scipy.io
+import scipy.io as sio
 import train_app
 from datasets import rc
 from datasets import util
 import nets.deep_sort.network_definition as net
 
-class rc(object):
+class RCCar(object):
 
-    def __init__(self, dataset_dir, num_validation_y=0.1, seed=1234):
+    def __init__(self, dataset_dir, num_validation_y=0.1, seed=None):
         self._dataset_dir = dataset_dir
         self._num_validation_y = num_validation_y
         self._seed = seed
@@ -18,18 +19,16 @@ class rc(object):
             self._dataset_dir)
         train_indices, _ = util.create_validation_split(
             np.asarray(ids, np.int64), self._num_validation_y, self._seed)
-
         images = images[train_indices]
         ids = ids[train_indices]
         camera_indices = camera_indices[train_indices]
         return images, ids, camera_indices
 
     def read_validation(self):
-        images, ids, camera_indices = rc.read_train_split_to_image(
+        images, ids, camera_indices = rc.read_test_split_to_image(
             self._dataset_dir)
         _, valid_indices = util.create_validation_split(
             np.asarray(ids, np.int64), self._num_validation_y, self._seed)
-
         images = images[valid_indices]
         ids = ids[valid_indices]
         camera_indices = camera_indices[valid_indices]
@@ -42,7 +41,7 @@ def main():
         "--dataset_dir", help="Path to rc dataset directory.",
         default="resources/rc")
     args = arg_parser.parse_args()
-    dataset = rc(args.dataset_dir, num_validation_y=0.1, seed=1234)
+    dataset = RCCar(args.dataset_dir, num_validation_y=0.8, seed=1234)
 
     if args.mode == "train":
         train_x, train_y, _ = dataset.read_train()

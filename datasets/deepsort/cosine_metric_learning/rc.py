@@ -1,3 +1,4 @@
+# vim: expandtab:ts=4:sw=4
 import os
 import numpy as np
 import cv2
@@ -14,12 +15,14 @@ def read_image_directory_to_str(directory):
             filename_base, ext = os.path.splitext(filename_base)
         if ext != ".jpg":
             continue  # Not an image.
-        rc_car_id, camera_str, _, _ = filename_base.split('_')
+        info = filename_base.split('_')
+        rc_car_id = int(info[0])
+        camera_id = int(info[1])
+        frame = int(info[2])
         image_filenames.append(os.path.join(directory, filename))
-        ids.append(int(rc_car_id))
-        cameras.append(int(camera_str[1:]))
+        ids.append(rc_car_id)
+        cameras.append(camera_id)
     return image_filenames, ids, cameras
-
 
 def read_image_directory_to_image(directory):
     image_filenames, ids, cameras = read_image_directory_to_str(directory)
@@ -37,21 +40,17 @@ def read_image_directory_to_image(directory):
     camera_indices = np.asarray(camera_indices, dtype=np.int64)
     return images, ids, camera_indices
 
-
 def read_train_split_to_str(dataset_dir):
     image_directory = os.path.join(dataset_dir, "image_train")
     return read_image_directory_to_str(image_directory)
-
 
 def read_train_split_to_image(dataset_dir):
     image_directory = os.path.join(dataset_dir, "image_train")
     return read_image_directory_to_image(image_directory)
 
-
 def read_test_split_to_str(dataset_dir):
     image_directory = os.path.join(dataset_dir, "image_test")
     return read_image_directory_to_image(image_directory)
-
 
 def read_test_split_to_image(dataset_dir):
     image_directory = os.path.join(dataset_dir, "image_test")
