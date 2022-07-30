@@ -3,7 +3,7 @@ import os
 import numpy as np
 import cv2
 
-MAX_LABEL = 4
+MAX_LABEL = 8
 IMAGE_SHAPE = 128, 64, 3
 
 def read_image_directory_to_str(directory):

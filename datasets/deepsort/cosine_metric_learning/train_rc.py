@@ -9,7 +9,7 @@ import nets.deep_sort.network_definition as net
 
 class RCCar(object):
 
-    def __init__(self, dataset_dir, num_validation_y=0.1, seed=None):
+    def __init__(self, dataset_dir, num_validation_y=0.1, seed=1234):
         self._dataset_dir = dataset_dir
         self._num_validation_y = num_validation_y
         self._seed = seed
@@ -31,9 +31,8 @@ class RCCar(object):
             np.asarray(ids, np.int64), self._num_validation_y, self._seed)
         images = images[valid_indices]
         ids = ids[valid_indices]
-        camera_indices = camera_indices[valid_indices]
+        camera_indices = camera_indices[valid_indices]       
         return images, ids, camera_indices
-
 
 def main():
     arg_parser = train_app.create_default_argument_parser("rc")
@@ -41,7 +40,7 @@ def main():
         "--dataset_dir", help="Path to rc dataset directory.",
         default="resources/rc")
     args = arg_parser.parse_args()
-    dataset = RCCar(args.dataset_dir, num_validation_y=0.8, seed=1234)
+    dataset = RCCar(args.dataset_dir, num_validation_y=0.3, seed=1234)
 
     if args.mode == "train":
         train_x, train_y, _ = dataset.read_train()
