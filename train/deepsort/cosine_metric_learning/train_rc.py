@@ -39,6 +39,9 @@ def main():
     arg_parser.add_argument(
         "--dataset_dir", help="Path to rc dataset directory.",
         default="resources/rc")
+    arg_parser.add_argument(
+        "--frozen_output", help="Path to rc frozen directory.",
+        default="resources/rc")
     args = arg_parser.parse_args()
     dataset = RCCar(args.dataset_dir, num_validation_y=0.3, seed=1234)
 
@@ -84,7 +87,7 @@ def main():
         train_app.freeze(
             functools.partial(net.preprocess, input_is_bgr=True),
             network_factory, args.restore_path, image_shape=rc.IMAGE_SHAPE,
-            output_filename="./rc.pb")
+            output_filename=args.frozen_output)
     else:
         raise ValueError("Invalid mode argument.")
 
