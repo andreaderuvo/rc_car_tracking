@@ -1,5 +1,0 @@
-classes = 1
-train = training_data/train.txt
-valid = training_data/test.txt
-names = training_data/classes.names
-backup = trained_weights
